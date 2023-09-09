@@ -6,7 +6,7 @@ const values = require('./dataBase2.js').values;
 const valueType = require('./dataBase2.js').valueType;
 
 function activate(context) {
-	console.log('Congratulations, extension "RWini" is now active!');
+	//console.log('Congratulations, extension "RWini" is now active!');
 
 
 	// For Semantic Tokens

@@ -1,0 +1,8 @@
+node_modules
+.vscode/*
+!.vscode/launch.json
+pnpm-lock.yaml
+package-lock.json
+*.zip
+*.tar.gz
+*.tgz
