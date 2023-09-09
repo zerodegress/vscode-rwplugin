@@ -1,0 +1,72 @@
+{
+  "name": "rwiniplugin",
+  "displayName": "rwini_plugin",
+  "description": "A plugin which improves the coding for MODs of a RTS game RustedWarfare.",
+  "publisher": "M_Ue11a",
+  "icon": "rwp.png",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:ini"
+  ],
+  "main": "./extension.js",
+
+
+  "contributes": {
+    "languages": [
+      {
+        "id": "rwini",
+        "aliases": [
+          "rwini"
+        ],
+        "extensions": [
+          ".ini"
+        ],
+        "configuration": "./language-configuration.json",
+        "editor.semanticHighlighting.enabled": true
+      }
+    ],
+    "semanticTokenTypes": [
+      {
+        "id": "customVariable",
+        "superType": "customVariable",
+        "description": "Defined by unit memory."
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rwini",
+        "scopeName": "source.ini",
+        "path": "./syntaxes/rwini.tmLanguage.json"
+      }
+    ],
+    "commands": [
+    ]
+  },
+
+
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.2.5",
+    "@types/vscode": "^1.80.0",
+    "@vscode/test-electron": "^2.3.2",
+    "eslint": "^8.41.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.3"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

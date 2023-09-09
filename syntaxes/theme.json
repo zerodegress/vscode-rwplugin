@@ -1,0 +1,8 @@
+{
+    "name": "rwini",
+    "type": "dark",
+    "semanticHighlighting": true,
+    "semanticTokenColors":{
+        "customVariable": "#ff0000"
+    }
+}
