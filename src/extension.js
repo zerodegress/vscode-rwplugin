@@ -69,7 +69,7 @@ function activate(context) {
       finding = document.lineAt(position.line - offset).text.match(/(?<![^ ]+ *)\[/)
       offset++
       if (finding != null) {
-        var begin = document.lineAt(position.line - offset + 1).text.indexOf('[')
+        let begin = document.lineAt(position.line - offset + 1).text.indexOf('[')
         let end
         if (document.lineAt(position.line - offset + 1).text.indexOf('_') > 0) {
           end = document.lineAt(position.line - offset + 1).text.indexOf('_')
@@ -77,7 +77,7 @@ function activate(context) {
         else {
           end = document.lineAt(position.line - offset + 1).text.indexOf(']')
         }
-        var CS = document.lineAt(position.line - offset + 1).text.substring(begin + 1, end)
+        let CS = document.lineAt(position.line - offset + 1).text.substring(begin + 1, end)
 
         let currentSection = ''
         switch (CS) {
@@ -104,7 +104,7 @@ function activate(context) {
     let customSections = []
     allCustomSections.map(inputSection => {
       if (inputSection.split('_')[0] == sectionName || (inputSection.split('_')[0] == 'hiddenAction' && sectionName == 'action')) {
-        var outputSection = inputSection.split('_')[1]
+        let outputSection = inputSection.split('_')[1]
         customSections.push(outputSection)
       }
     })
@@ -112,12 +112,13 @@ function activate(context) {
   }
 
   function getIfFirst(document, position) {
-    var offset = 0
+    let offset = 0
+    let finding
     while (finding != ' ' && finding != ':' && offset < 50) {
-      var finding = document.lineAt(position).text.charAt(position.character - offset - 1)
+      finding = document.lineAt(position).text.charAt(position.character - offset - 1)
       offset++
       if (finding == ' ' || finding == ':') {
-        var currentValuePart = document.lineAt(position).text.substring(position.character - offset + 1, position.character)
+        let currentValuePart = document.lineAt(position).text.substring(position.character - offset + 1, position.character)
         if (currentValuePart.match(/\./g) == null) { return true }
         else { return false }
       }
@@ -126,23 +127,23 @@ function activate(context) {
 
   class getCustomVariable {
     constructor(document) {
-      var memoryNumber = document.getText().match(/(?<=number\[?\]? +)\w+|(?<=@memory +)\w+(?=: *number\[?\]?)/ig)
+      let memoryNumber = document.getText().match(/(?<=number\[?\]? +)\w+|(?<=@memory +)\w+(?=: *number\[?\]?)/ig)
       if (memoryNumber == null) { this.memoryNumber = [] } else { this.memoryNumber = memoryNumber }
-      var resourceNumber = document.getText().match(/(?<=\[resource_)\w+/ig)
+      let resourceNumber = document.getText().match(/(?<=\[resource_)\w+/ig)
       if (resourceNumber == null) { this.resourceNumber = [] } else { this.resourceNumber = resourceNumber }
-      var memoryFloat = document.getText().match(/(?<=float\[?\]? +)\w+|(?<=@memory +)\w+(?=: *float\[?\]?)/ig)
+      let memoryFloat = document.getText().match(/(?<=float\[?\]? +)\w+|(?<=@memory +)\w+(?=: *float\[?\]?)/ig)
       if (memoryFloat == null) { this.memoryFloat = [] } else { this.memoryFloat = memoryFloat }
-      var memoryUnit = document.getText().match(/(?<=unit\[?\]? +)\w+|(?<=@memory +)\w+(?=: *unit\[?\]?)/ig)
+      let memoryUnit = document.getText().match(/(?<=unit\[?\]? +)\w+|(?<=@memory +)\w+(?=: *unit\[?\]?)/ig)
       if (memoryUnit == null) { this.memoryUnit = [] } else { this.memoryUnit = memoryUnit }
-      var memoryString = document.getText().match(/(?<=string +)\w+|(?<=@memory +)\w+(?=: *string)/ig)
+      let memoryString = document.getText().match(/(?<=string +)\w+|(?<=@memory +)\w+(?=: *string)/ig)
       if (memoryString == null) { this.memoryString = [] } else { this.memoryString = memoryString }
-      var memoryBool = document.getText().match(/(?<=boolean\[?\]? +)\w+|(?<=@memory +)\w+(?=: *boolean\[?\]?)/ig)
+      let memoryBool = document.getText().match(/(?<=boolean\[?\]? +)\w+|(?<=@memory +)\w+(?=: *boolean\[?\]?)/ig)
       if (memoryBool == null) { this.memoryBool = [] } else { this.memoryBool = memoryBool }
     }
   }
 
   function getAllCustoms(document) {
-    var customValues = new getCustomVariable(document).memoryNumber.concat(new getCustomVariable(document).memoryFloat).concat(new getCustomVariable(document).memoryBool)
+    let customValues = new getCustomVariable(document).memoryNumber.concat(new getCustomVariable(document).memoryFloat).concat(new getCustomVariable(document).memoryBool)
     return customValues.map(names => { return new vscode.CompletionItem('memory.'.concat(names), vscode.CompletionItemKind.Constant) }).concat(
       new getCustomVariable(document).resourceNumber.map(names => { return new vscode.CompletionItem('resource.'.concat(names), vscode.CompletionItemKind.Constant) })).concat(
       new getCustomVariable(document).memoryUnit.map(names => { return new vscode.CompletionItem('memory.'.concat(names), vscode.CompletionItemKind.Field) })).concat(
@@ -249,9 +250,9 @@ function activate(context) {
   const keyHoverPrompt = vscode.languages.registerHoverProvider('rwini', {
     provideHover(document, position) {
       if (document.lineAt(position).text.indexOf(':') > position.character) {
-        var key = document.getText(document.getWordRangeAtPosition(position, /@?\w+/))
-        var occurSections = []
-        var occurTypes = []
+        let key = document.getText(document.getWordRangeAtPosition(position, /@?\w+/))
+        let occurSections = []
+        let occurTypes = []
         for (let section in allKeys) {
           if (allKeys[section][key] != undefined) {
             occurSections.push(section)
@@ -272,7 +273,7 @@ function activate(context) {
 
   const valueHoverPrompt = vscode.languages.registerHoverProvider('rwini', {
     provideHover(document, position) {
-      var value = document.getText(document.getWordRangeAtPosition(position))
+      let value = document.getText(document.getWordRangeAtPosition(position))
       if (document.lineAt(position).text.indexOf(':') < position.character) {
         let valueInfo = valueType[value]
         if (valueInfo != undefined) {
