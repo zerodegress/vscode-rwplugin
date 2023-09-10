@@ -1,9 +1,6 @@
-
-const vscode = require('vscode');
-const sections = require('./dataBase2.js').sections;
-const allKeys = require('./dataBase1.js').allKeys;
-const values = require('./dataBase2.js').values;
-const valueType = require('./dataBase2.js').valueType;
+import vscode from 'vscode'
+import { sections, values, valueType } from './dataBase2'
+import { allKeys } from './dataBase1'
 
 function activate(context) {
 	//console.log('Congratulations, extension "RWini" is now active!');

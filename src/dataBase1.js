@@ -1,12 +1,12 @@
 
-const allKeys = {
+export const allKeys = {
 core:{
 name:['string','core'],
 altNames:['string','core'],
 class:['string','core'],
 strictLevel:['float','core'],
 price:['int(price)','core'],
-mass:['int','core'],
+mass:['int','core'], 
 techLevel:['int','core'],
 buildSpeed:['float','core'],
 radius:['int','core'],
@@ -1019,6 +1019,6 @@ template: {
 },
 
 }
-module.exports = {allKeys};
+
 
 

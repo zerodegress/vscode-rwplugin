@@ -1,5 +1,5 @@
 
-const sections = {
+export const sections = {
     core: 'core',
     canBuild: 'canBuild_',
     graphics: 'graphics',
@@ -23,7 +23,7 @@ const sections = {
     template: 'template_'
 }
 
-const values = {
+export const values = {
 
     //Common Values
     bool: ['true','false'],
@@ -58,7 +58,7 @@ const values = {
         'isAtGroundHeight()',
         'flying()',
         'isFlying()',
-        'isMoving()',
+        'isMoving()', 
         'isAtTopSpeed()',
         'isInWater()',
         'isOverwater()',
@@ -166,7 +166,7 @@ const values = {
     ]
 };
 
-const valueType = {
+export const valueType = {
 
     //Common Values
     true: ['bool',''],
@@ -310,7 +310,3 @@ const valueType = {
 
     
 }
-
-module.exports = {sections,values,valueType};
-
-
